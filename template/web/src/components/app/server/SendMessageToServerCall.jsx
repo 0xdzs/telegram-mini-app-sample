@@ -18,9 +18,14 @@ const SendMessageToServerCall = () => {
 
 
     const onSendMessage = async (message) => {
-        const response = await sendMessageToServer(message, queryId)
-        const responseJson = JSON.stringify(response)
-        webApp.showAlert(`response: ${responseJson}`)
+        try {
+            const response = await sendMessageToServer(message, queryId)
+            const responseJson = JSON.stringify(response)
+            webApp.showAlert(`response: ${responseJson}`)
+        } catch (error) {
+            console.error('Error:', error)
+            webApp.showAlert(`Error connecting to server: ${error.message}`)
+        }
     }
 
     return (
